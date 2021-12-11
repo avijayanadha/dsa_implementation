@@ -15,6 +15,27 @@ class SinglyLinkedList {
     push(data) {
         let node = new Node(data)
         /*
+
+        (head) 1 -> 2 -> 3 -> 4 (Tail)
+        If the list is empty assign tail and head to the created node
+        otherwise new node will be the new tail
+
+        */
+        if (this.head === null) {
+            this.head = node;
+            this.tail = node;
+        } else {
+            let temp = this.tail;
+            temp.next = node;
+            this.tail = node;
+        }
+
+        this.length++;
+    }
+    
+    unshift(data) {
+        let node = new Node(data)
+        /*
         If the list is empty assign tail and head to the created node
         otherwise new node will be head and new node.next points to old head
         */
@@ -35,7 +56,7 @@ class SinglyLinkedList {
         Remove the last element in the list
         1 - > 2 -> 3 -> 4 -> 5
         removes 5 in this example
-        
+
         - if the list is empty return null
         - if the list is of length 1 return head and set head and tail as null
         - else iterate and find second to last element and returns its next node and point second to last element next as null also set tail as the second to last node
