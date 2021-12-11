@@ -29,4 +29,31 @@ class SinglyLinkedList {
 
         this.length++;
     }
+
+    pop() {
+        /*
+        Removes the first element from the list and return it
+        - if the list is empty return null
+        - if the list has only one element return that and set head and tail as null
+        - return the head and set the new head as old head.next
+        */
+
+        if (this.head === null) {
+            return null;
+        } else if(this.head === this.tail) {
+            let head = this.head;
+            this.head = null;
+            this.tail = null;
+            this.length--;
+
+            return head;
+        } else {
+            let oldHead = this.head;
+            this.head = oldHead.next;
+            this.length--;
+
+            return oldHead;
+        }
+    }
 }
+
