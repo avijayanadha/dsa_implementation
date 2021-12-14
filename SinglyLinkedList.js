@@ -112,5 +112,126 @@ class SinglyLinkedList {
             return oldHead;
         }
     }
+
+    get(index) {
+        if (index < 0 || index >= this.length) {
+            return null;
+        } else if (index === 0) {
+            return this.head;
+        } else if (index === (this.length - 1)) {
+            return this.tail;
+        } else {
+            let i=0, node = this.head;
+
+            while (node.next !== null) {
+                if (i === index) {
+                    return node;
+                } else {
+                    node = node.next;
+                }
+                i++;
+            }
+        }
+    }
+
+    set(index, value) {
+        let node = this.get(index);
+        node.data = value;
+        return node;
+    }
+
+    insert (index, value) {
+        let previousIndex = index -1, previousNode, currentNode;
+        let newNode = new Node(value);
+
+        if (index < 0 || index > this.length) {
+            return null;
+        } else if (index === 0) {
+            newNode.next = this.head;
+            this.head = newNode;
+            this.length ++;
+
+            return this;
+        } else if (index === this.length) {
+            this.tail.next = newNode;
+            this.tail = newNode;
+            this.length ++;
+            
+            return this;
+        } else {
+            previousNode = this.get(previousIndex);
+            currentNode = previousNode.next;
+
+            previousNode.next = newNode;
+            newNode.next = currentNode;
+            console.log(this.print());
+            this.length ++;
+
+            return this;
+        }
+    }
+
+    remove(index) {
+        let node, nextNode, previousNode;
+
+        if (index < 0 || index >= this.length) {
+            return null;
+        } else if (index === 0) {
+            if (this.head === this.tail) {
+                node = this.head;
+                this.head = this.tail = null;
+                this.length --;
+
+                return node;
+            } else {
+                node = this.head;
+                this.head = node.next;
+
+                node.next = null;
+                this.length --;
+                
+                return node;
+            }
+           
+        } else if (index === (this.length - 1)) {
+            previousNode = this.get(index -1)
+            node = this.tail;
+            this.tail = previousNode;
+            this.tail.next = null;
+            node.next = null;
+
+            this.length --;
+            return node;
+        } else {
+            previousNode = this.get(index -1)
+            node = previousNode.next;
+            nextNode = node.next;
+
+            previousNode.next = nextNode;
+
+            node.next = null;
+
+            this.length --;
+            return node;
+        }
+    }
+
+    print() {
+        let listString = '', node = this.head;
+        if (node) {
+            listString = `${node.data}`;
+
+            while (node.next) {
+                node = node.next;
+                listString = `${listString} -> ${node.data}`;
+            }
+
+            return listString;
+            
+        } else {
+            return listString;
+        }
+        
+    }
 }
 
