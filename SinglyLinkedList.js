@@ -189,7 +189,7 @@ class SinglyLinkedList {
 
                 node.next = null;
                 this.length --;
-                
+
                 return node;
             }
            
@@ -232,6 +232,35 @@ class SinglyLinkedList {
             return listString;
         }
         
+    }
+
+    reverse() {
+        /*
+            Reverse inline
+
+            (head) 0 -> 1 -> 2 -> 3 (tail) 
+        */
+
+        let currentNode = this.head, previousNode = null, nextNode = null;
+        this.tail = currentNode;
+           
+        /*
+            3 pointers are there, one a previousNode, currentNode, and nextNode
+            Dont forgot to set head and tail correctly, we start of by setting head as the currentNode and set head as tail
+
+            and in the while set previousNode, currentNode and next node, if there is no currentNode.next then we set currentNode as the head
+        */
+        while (currentNode.next) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        
+        currentNode.next = previousNode;
+        this.head = currentNode;
+
+        return this;
     }
 }
 
